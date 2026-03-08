@@ -4,7 +4,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:type="MailApp">
 
-  <Id>REPLACE-WITH-A-GUID</Id>
+  <Id>4ba91f96-e8a1-429f-8854-f5870a9d7fc7</Id>
   <Version>1.0.0.0</Version>
   <ProviderName>DealCloud Tools</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
