@@ -1,40 +1,69 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<OfficeApp
-  xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:type="MailApp">
-
-  <Id>4ba91f96-e8a1-429f-8854-f5870a9d7fc7</Id>
-  <Version>1.0.0.0</Version>
-  <ProviderName>DealCloud Tools</ProviderName>
-  <DefaultLocale>en-US</DefaultLocale>
-
-  <DisplayName DefaultValue="DealCloud Intake"/>
-  <Description DefaultValue="Review and intake emails for DealCloud."/>
-
-  <IconUrl DefaultValue="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"/>
-  <HighResolutionIconUrl DefaultValue="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"/>
-
-  <SupportUrl DefaultValue="https://github.com/kyleaberger10-stack"/>
-
-  <Hosts>
-    <Host Name="Mailbox"/>
-  </Hosts>
+<VersionOverrides
+  xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1"
+  xsi:type="VersionOverridesV1_1">
 
   <Requirements>
-    <Sets>
-      <Set Name="Mailbox" MinVersion="1.1"/>
-    </Sets>
+    <bt:Sets DefaultMinVersion="1.3">
+      <bt:Set Name="Mailbox"/>
+    </bt:Sets>
   </Requirements>
 
-  <FormSettings>
-    <Form xsi:type="ItemRead">
-      <DesktopSettings>
-        <SourceLocation DefaultValue="https://kyleaberger10-stack.github.io/dealcloud-outlook-intake-clean/taskpane.html"/>
-        <RequestedHeight>450</RequestedHeight>
-      </DesktopSettings>
-    </Form>
-  </FormSettings>
+  <Hosts>
+    <Host xsi:type="MailHost">
+      <DesktopFormFactor>
 
-  <Permissions>ReadItem</Permissions>
-</OfficeApp>
+        <FunctionFile resid="Commands.Url"/>
+
+        <ExtensionPoint xsi:type="MessageReadCommandSurface">
+          <OfficeTab id="TabDefault">
+            <Group id="DealCloudGroup">
+              <Label resid="DealCloudGroup.Label"/>
+
+              <Control xsi:type="Button" id="OpenTaskPaneButton">
+                <Label resid="TaskpaneButton.Label"/>
+                <Supertip>
+                  <Title resid="TaskpaneButton.Title"/>
+                  <Description resid="TaskpaneButton.Description"/>
+                </Supertip>
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16"/>
+                  <bt:Image size="32" resid="Icon.32"/>
+                  <bt:Image size="80" resid="Icon.80"/>
+                </Icon>
+                <Action xsi:type="ShowTaskpane">
+                  <SourceLocation resid="Taskpane.Url"/>
+                </Action>
+              </Control>
+
+            </Group>
+          </OfficeTab>
+        </ExtensionPoint>
+
+      </DesktopFormFactor>
+    </Host>
+  </Hosts>
+
+  <Resources>
+    <bt:Images>
+      <bt:Image id="Icon.16" DefaultValue="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"/>
+      <bt:Image id="Icon.32" DefaultValue="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"/>
+      <bt:Image id="Icon.80" DefaultValue="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"/>
+    </bt:Images>
+
+    <bt:Urls>
+      <bt:Url id="Commands.Url" DefaultValue="https://kyleaberger10-stack.github.io/dealcloud-outlook-intake-clean/taskpane.html"/>
+      <bt:Url id="Taskpane.Url" DefaultValue="https://kyleaberger10-stack.github.io/dealcloud-outlook-intake-clean/taskpane.html"/>
+    </bt:Urls>
+
+    <bt:ShortStrings>
+      <bt:String id="DealCloudGroup.Label" DefaultValue="DealCloud"/>
+      <bt:String id="TaskpaneButton.Label" DefaultValue="DealCloud Intake"/>
+      <bt:String id="TaskpaneButton.Title" DefaultValue="DealCloud Intake"/>
+    </bt:ShortStrings>
+
+    <bt:LongStrings>
+      <bt:String id="TaskpaneButton.Description" DefaultValue="Review and intake this email."/>
+    </bt:LongStrings>
+  </Resources>
+
+</VersionOverrides>
