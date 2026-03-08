@@ -8,14 +8,31 @@
 
     <script>
       Office.onReady(() => {
-        document.getElementById("status").innerText =
-          "Outlook task pane loaded successfully.";
+        const item = Office.context.mailbox.item;
+
+        // Subject (sync)
+        document.getElementById("subject").innerText =
+          item.subject || "(no subject)";
+
+        // Body (async)
+        item.body.getAsync("text", function (result) {
+          if (result.status === Office.AsyncResultStatus.Succeeded) {
+            document.getElementById("body").innerText = result.value;
+          } else {
+            document.getElementById("body").         "Unable to read email body.";
+          }
+        });
       });
     </script>
   </head>
 
-  <body>
+  <body style="font-family: Segoe UI, sans-serif">
     <h2>DealCloud Intake</h2>
-    <p id="status">Loading…</p>
+
+    <h4>Subject</h4>
+    <div id="subject" style="margin-bottom: 12px;"></div>
+
+    <h4>Body</h4>
+    <pre id="body" style="white-space: pre-wrap;"></pre>
   </body>
 </html>
